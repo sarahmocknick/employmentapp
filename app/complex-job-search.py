@@ -1,16 +1,24 @@
 #COMPLEX JOB QUERY THAT TAKES MORE INFORMATION
-
+##IMPORTS
 import os
 from dotenv import load_dotenv
-
-load_dotenv()
-
-app_id = os.getenv("APP_ID")
-app_key = os.getenv("APP_KEY")
-
 import requests
 import json
 from getpass import getpass
+
+#ENVIRONMENT VARIABLES AND CONSTANTS
+load_dotenv()
+
+user_app_id = os.getenv("APP_ID")
+user_app_key = os.getenv("APP_KEY")
+
+#breakpoint()
+#quit()
+
+
+##makes you type this in everytime
+
+#FUNCTIONS
 
 app_id = getpass("Please input your app id: ")
 app_key = getpass("Please input your app key: ")
