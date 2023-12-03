@@ -50,3 +50,20 @@ python app/complex-job-search.py
 
 
 
+
+
+## Web App
+
+Run the web app (then view in the browser at https://localhost:5000/):
+
+'''sh
+
+#Mac OS:
+
+FLASK_APP=web_app flask run
+
+#Windows OS:
+
+export FLASK_APP=web_app
+flask run
+'''
