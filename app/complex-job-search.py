@@ -1,4 +1,9 @@
 #COMPLEX JOB QUERY THAT TAKES MORE INFORMATION
+
+import os
+app_id = os.getenv("APP_ID")
+
+
 import requests
 import json
 from getpass import getpass
