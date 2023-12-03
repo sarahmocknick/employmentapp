@@ -1,5 +1,13 @@
 #SIMPLE JOB QUERY THAT ONLY TAKES ONE INPUT FROM USER
 
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+app_id = os.getenv("APP_ID")
+app_key = os.getenv("APP_KEY")
+
 import requests
 import json
 from getpass import getpass

@@ -1,8 +1,12 @@
 #COMPLEX JOB QUERY THAT TAKES MORE INFORMATION
 
 import os
-app_id = os.getenv("APP_ID")
+from dotenv import load_dotenv
 
+load_dotenv()
+
+app_id = os.getenv("APP_ID")
+app_key = os.getenv("APP_KEY")
 
 import requests
 import json
@@ -11,8 +15,6 @@ from getpass import getpass
 app_id = getpass("Please input your app id: ")
 app_key = getpass("Please input your app key: ")
 
-#app_key = "2f9346990e80efa58db891b2ed825637"
-#app_id = "651392a1"
 
 what = input("What kind of job are you looking for?: ")
 salary_pref = input("Do you have a preference for a salary minumum? Please type yes or no: ").lower()

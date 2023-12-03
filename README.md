@@ -18,12 +18,18 @@ pip install -r requirements.txt
 '''
 
 
-##Usage
-
 Register for an app_key and an app_id on adzuna: https://developer.adzuna.com/
 
-#app_key = "2f9346990e80efa58db891b2ed825637"
-#app_id = "651392a1"
+
+Create a ".env" file and paste in the following contents:
+
+'''sh
+app_id = "651392a1"
+
+app_key = "2f9346990e80efa58db891b2ed825637"
+
+##Usage
+
 
 Run the simple job search:
 
