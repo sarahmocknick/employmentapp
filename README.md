@@ -34,7 +34,7 @@ app_key = "2f9346990e80efa58db891b2ed825637"
 Run the simple job search:
 
 '''sh
-python app/simple-job-search.py
+python app/simple.py
 '''
 
 
@@ -45,7 +45,7 @@ python app/simple-job-search.py
 Run the complex job search:
 
 '''sh
-python app/complex-job-search.py
+python app/complex.py
 '''
 
 

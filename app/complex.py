@@ -48,7 +48,7 @@ else:
 
 #should ask for salary requirement? and availability?
 
-def complex_job_search(where=None, what_exclude=None):
+def complex(where=None, what_exclude=None):
     base_url = "http://api.adzuna.com/v1/api/jobs/gb/search/1"
 
     params = {
@@ -74,7 +74,7 @@ def complex_job_search(where=None, what_exclude=None):
         print(r.text)
         return None
 
-result = complex_job_search()
+result = complex()
 if result and any(result["results"]):
     #print(result)
     for job in result.get('results'):
