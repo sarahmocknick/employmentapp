@@ -63,3 +63,11 @@ if result and 'results' in result:
         print("No results found for the specified job query.")
 else:
     print("Error in retrieving job data. Please check your input and try again.")
+
+
+
+
+
+
+
+
