@@ -3,8 +3,41 @@
 
 {% block content %}
 
-    <h2>Simple Job Search Dashboard</h2>
+    <h2>Job Opportunities</h2>
 
-    <p>This is where to put the simple job search function.</p>
+    <div class="simple_dashboard">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Job Title</th>
+                    <th>Company Name</th>
+                    <th>Location</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Software Engineer</td>
+                    <td>ABC Tech</td>
+                    <td>New York</td>
+                    <td>Developing innovative software solutions</td>
+                </tr>
+                <tr>
+                    <td>Marketing Specialist</td>
+                    <td>XYZ Marketing</td>
+                    <td>San Francisco</td>
+                    <td>Creating and implementing marketing strategies</td>
+                </tr>
+                <!-- Add more job rows as needed -->
+            </tbody>
+        </table>
+    </div>
+
+    <style>
+        /* You can include additional styling here */
+        .job-list {
+            margin-top: 20px;
+        }
+    </style>
 
 {% endblock %}
