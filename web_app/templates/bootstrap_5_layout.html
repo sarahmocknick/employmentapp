@@ -41,7 +41,7 @@
     -->
     {% set nav_links = [
         ('/about', 'about', 'About'),
-        ('/hello', 'hello', 'Hello'),
+        ('/hello', 'hello', 'How to Use'),
         ('/simple/dashboard', 'hello', 'Simple Job Search'),
 
 
@@ -49,7 +49,7 @@
     {% set active_page = active_page|default('home') -%}
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <!--a class="navbar-brand" href="/">My Web App</a-->
+            <!--a class="navbar-brand" href="/">Job Search App</a-->
             <a class="navbar-brand" href="/">
                 <!--
                     ICONS
@@ -57,7 +57,7 @@
                 -->
                 <i class="bi-globe" style="font-size: 1.7rem; color: white;"></i>
                 &nbsp;
-                My Web App
+                Job Search App
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
