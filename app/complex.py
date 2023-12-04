@@ -46,7 +46,6 @@ if(permanent_query == 0):
 else:
     permanent = 0
 
-#should ask for salary requirement? and availability?
 
 def complex_job_search(where=None, what_exclude=None):
     base_url = "http://api.adzuna.com/v1/api/jobs/gb/search/1"
