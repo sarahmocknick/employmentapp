@@ -1,0 +1,19 @@
+{% extends "bootstrap_5_layout.html" %}
+{% set active_page = "simple_form" %}
+
+{% block content %}
+
+    <h2>Simple Job Search Form</h2>
+
+    <p>Request some job search data...</p>
+
+    <form action="/simple/dashboard" method="POST">
+
+        <label>Job Listing:</label>
+        <input type="text" name="What kind of job are you looking for?" placeholder="software engineer" value="software engineer">
+        <br>
+
+        <button class="btn btn-primary">Submit</button>
+    </form>
+
+{% endblock %}
