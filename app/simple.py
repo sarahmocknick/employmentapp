@@ -66,65 +66,7 @@ else:
 
 
 
-def generate_html_output(results):
-    html_output = '''
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Job Search Results</title>
-    </head>
-    <body>
-        <h1>Job Search Results</h1>
-        <div>
-    '''
 
-    if results and 'results' in results:
-        if results['results']:
-            html_output += '''
-            <table border="1">
-                <tr>
-                    <th>Job Title</th>
-                    <th>Company</th>
-                    <th>Location</th>
-                    <th>Description</th>
-                </tr>
-            '''
-
-            for job in results.get('results'):
-                html_output += f'''
-                <tr>
-                    <td>{job.get('title')}</td>
-                    <td>{job.get('display_name')}</td>
-                    <td>{job.get('area')}</td>
-                    <td>{job.get('description')}</td>
-                </tr>
-                '''
-
-            html_output += '''
-            </table>
-            '''
-        else:
-            html_output += '''
-            <p>No results found for the specified job query.</p>
-            '''
-
-    else:
-        html_output += '''
-        <p>Error in retrieving job data. Please check your input and try again.</p>
-        '''
-
-    html_output += '''
-        </div>
-    </body>
-    </html>
-    '''
-    return html_output
-
-result = simple_job_search()
-html_content = generate_html_output(result)
-
-with open('simple_dashboard.html', 'w') as file:
-    file.write(html_content)
 
 
 
