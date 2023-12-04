@@ -1,33 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Job Search Results</title>
-</head>
-<body>
-    <h1>Job Search Results</h1>
-    <div>
-        {% if results %}
-            <table border="1">
-                <tr>
-                    <th>Job Title</th>
-                    <th>Company</th>
-                    <th>Location</th>
-                    <th>Description</th>
-                </tr>
-                {% for job in results %}
-                    <tr>
-                        <td>{{ job.title }}</td>
-                        <td>{{ job.display_name }}</td>
-                        <td>{{ job.area }}</td>
-                        <td>{{ job.description }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-        {% else %}
-            <p>No results found for the specified job query.</p>
-        {% endif %}
-    </div>
-</body>
-</html>
+{% extends "bootstrap_5_layout.html" %}
+{% set active_page = "simple_dashboard" %}
 
+{% block content %}
 
+    <h2>Simple Job Search Dashboard</h2>
+
+    <p>This is where to put the simple job search function.</p>
+
+{% endblock %}
