@@ -52,26 +52,20 @@ if __name__ == "__main__":
     what = input("What kind of job are you looking for?")
     print(what)
     result = simple_job_search(what)
-    if result and 'results' in result:
-        if result['results']:
-            print("Example Result:")
+    #if result and 'results' in result:
             #print(result)
-            for job in result.get('results'):
-            #what if there is a case where there are no results/errors?
-            #we need to account for this in the code here
-                print("Job Title:", job.get('title'))
-                print("Company:", job.get('display_name'))
-                print("Location:", job.get('area'))
-                print("Description:", job.get('description'))
-                print("-" * 20)
-        else:
-            print("No results found for the specified job query.")
+    if result and any(result["results"]):
+    #print(result)
+        for job in result.get('results'):
+            print("Job Title:", job.get('title'))
+            print("Company:", job["company"]["display_name"])
+            print("Location:", job["location"]["display_name"])
+            print("Description:", job.get('description'))
+            print("-" * 20)
     else:
+            print("No results found for the specified job query.")
+else:
         print("Error in retrieving job data. Please check your input and try again.")
-
-
-
-
 
 
 
