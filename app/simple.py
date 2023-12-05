@@ -26,7 +26,7 @@ APP_KEY = os.getenv("APP_KEY")
 
 
 def simple_job_search(what="software developer"):
-    base_url = "http://api.adzuna.com/v1/api/jobs/gb/search/1"
+    base_url = "http://api.adzuna.com/v1/api/jobs/gb/search"
 
     params = {
         'app_id': APP_ID,

@@ -2,42 +2,35 @@
 {% set active_page = "simple_dashboard" %}
 
 {% block content %}
+<h2>Job Opportunities</h2>
 
-    <h2>Job Opportunities</h2>
+<div class="simple_dashboard">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Job Title</th>
+                <th>Company Name</th>
+                <th>Location</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in jobs %}
+            <tr>
+                <td>{{ job.get('title') }}</td>
+                <td>{{ job.get('display_name') }}</td>
+                <td>{{ job.get('area') }}</td>
+                <td>{{ job.get('description') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
-    <div class="simple_dashboard">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Job Title</th>
-                    <th>Company Name</th>
-                    <th>Location</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Software Engineer</td>
-                    <td>ABC Tech</td>
-                    <td>New York</td>
-                    <td>Developing innovative software solutions</td>
-                </tr>
-                <tr>
-                    <td>Marketing Specialist</td>
-                    <td>XYZ Marketing</td>
-                    <td>San Francisco</td>
-                    <td>Creating and implementing marketing strategies</td>
-                </tr>
-                <!-- Add more job rows as needed -->
-            </tbody>
-        </table>
-    </div>
-
-    <style>
-        /* You can include additional styling here */
-        .job-list {
-            margin-top: 20px;
-        }
-    </style>
-
+<style>
+    /* Additional styling can be included here */
+    .job-list {
+        margin-top: 20px;
+    }
+</style>
 {% endblock %}
