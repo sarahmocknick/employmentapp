@@ -24,7 +24,7 @@ APP_KEY = os.getenv("APP_KEY")
 #app_key = getpass("Please input your app key: ")
 
 
-def complex_job_search(where=None, what_exclude=None):
+def complex_job_search(where=None, what_exclude=None, what="Software Developer", salary_min=0, full_time=1, permanent=1):
     base_url = "http://api.adzuna.com/v1/api/jobs/gb/search/1"
 
     params = {
@@ -49,7 +49,7 @@ def complex_job_search(where=None, what_exclude=None):
         print(f"Error: {r.status_code}")
         print(r.text)
         return None
-
+ 
 
 if __name__ == "__main__":
     what = input("What kind of job are you looking for?")
@@ -78,8 +78,6 @@ if __name__ == "__main__":
     if result and any(result["results"]):
         #print(result)
         for job in result.get('results'):
-        #what if there is a case where there are no results/errors?
-        #we need to account for this in the code here
             print("Job Title:", job.get('title'))
             print("Company:", job["company"]["display_name"])
             print("Location:", job["location"]["display_name"])
