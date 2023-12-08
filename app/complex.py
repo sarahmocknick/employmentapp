@@ -16,8 +16,6 @@ APP_KEY = os.getenv("APP_KEY")
 #quit()
 
 
-##makes you type this in everytime
-
 #FUNCTIONS
 
 #app_id = getpass("Please input your app id: ")
