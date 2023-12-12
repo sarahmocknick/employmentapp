@@ -18,8 +18,10 @@
             {% for job in jobs %}
             <tr>
                 <td>{{ job.get('title') }}</td>
-                <td>{{ job.get('display_name') }}</td>
-                <td>{{ job.get('area') }}</td>
+
+                <td>{{ job["company"]["display_name"] }}</td>
+                <td>{{ job["location"]["display_name"] }}</td>
+
                 <td>{{ job.get('description') }}</td>
             </tr>
             {% endfor %}
