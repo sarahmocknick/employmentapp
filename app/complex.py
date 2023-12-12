@@ -62,10 +62,10 @@ if __name__ == "__main__":
     permanent_query = input("Do you want a permanent job? Please type yes or no: ").lower()
 
 
-    if(full_time_query == "yes"):
-        full_time = 1;
+    if full_time_query == "yes":
+        full_time = 1
     else:
-        full_time = 0;
+        full_time = 0
 
     if(permanent_query == 0):
         permanent = 1
