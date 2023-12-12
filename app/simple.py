@@ -57,7 +57,7 @@ if __name__ == "__main__":
     if result and any(result["results"]):
     #print(result)
         for job in result.get('results'):
-            print("Job Title:", job.get('title'))
+            print("Job Title:", job.get('title').upper())
             print("Company:", job["company"]["display_name"])
             print("Location:", job["location"]["display_name"])
             print("Description:", job.get('description'))

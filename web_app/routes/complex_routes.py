@@ -15,6 +15,9 @@ def complex_dashboard():
             if isinstance(result, dict) and 'results' in result:
                 jobs = result['results']
                 if jobs:
+                    for job in jobs:
+                        if job.get('contract_time') == 'full_time':
+                            job['contract_time'] = 'Full Time'
                     return render_template("complex_dashboard.html", jobs=jobs)
                 else:
                     flash("No results found for the specified job query.", "warning")

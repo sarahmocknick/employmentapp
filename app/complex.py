@@ -80,7 +80,9 @@ if __name__ == "__main__":
             print("Company:", job["company"]["display_name"])
             print("Location:", job["location"]["display_name"])
             print("Salary:", job.get('salary_min'))
-            print("Availability:", job.get('contract_time'))
+            availability = job.get('contract_time')
+            availability = availability.replace("_", " ")
+            print("Availability:", availability)
             print("Description:", job.get('description'))
             print("-" * 20)
     else:
