@@ -2,9 +2,39 @@
 {% set active_page = "complex_dashboard" %}
 
 {% block content %}
+<h2>Job Opportunities</h2>
 
-    <h2>Complex Job Search Dashboard</h2>
+<div class="complex_dashboard">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Job Title</th>
+                <th>Company Name</th>
+                <th>Location</th>
+                <th>Salary</th>
+                <th>Availability</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in jobs %}
+            <tr>
+                <td>{{ job.get('title') }}</td>
+                <td>{{ job["company"]["display_name"] }}</td>
+                <td>{{ job["location"]["display_name"] }}</td>
+                <td>{{ job.get('salary_min') }}</td>
+                <td>{{ job.get('contract_time') }}</td>
+                <td>{{ job.get('description') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
-    <p>This is where to put the complex job search function.</p>
-
+<style>
+    /* Additional styling can be included here */
+    .job-list {
+        margin-top: 20px;
+    }
+</style>
 {% endblock %}
