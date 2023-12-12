@@ -65,7 +65,7 @@ if __name__ == "__main__":
     if full_time_query == "yes":
         full_time = 1
     else:
-        full_time = 0
+        full_time = "Part Time"
 
     if(permanent_query == 0):
         permanent = 1
