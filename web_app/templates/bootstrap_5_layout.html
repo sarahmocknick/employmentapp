@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -10,23 +10,64 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
+    <style>
+        body {
+            background-color: #6cb2eb; /* Original blue box background */
+            color: #001f3f; /* Navy blue text color */
+            font-family: 'Verdana', sans-serif; /* Verdana font */
+        }
+
+        nav {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+        }
+
+        .navbar-toggler-icon {
+            background-color: #fff;
+        }
+
+        .navbar-nav {
+            margin-right: 10px;
+        }
+
+        .nav-link {
+            color: #fff;
+        }
+
+        .nav-link:hover {
+            color: #f8f9fa;
+        }
+
+        .container {
+            background-color: #f0f7ff; /* Light blue background */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #3d6cb2; /* Dark blue footer background */
+            color: #fff; /* White text color */
+            border-radius: 4px;
+        }
+    </style>
+
     <title>The Job App! | Find the Perfect Job for You!</title>
 </head>
 <body>
 
-    <!--
-        FLASH MESSAGING
-        https://flask.palletsprojects.com/en/1.1.x/patterns/flashing/
-        https://getbootstrap.com/docs/5.0/components/alerts/
-    -->
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         {% for category, message in messages %}
-            <!--
-                BOOTSTRAP ALERTS
-                https://getbootstrap.com/docs/5.0/components/alerts/#dismissing
-            -->
-            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert" style="margin-bottom:0;">
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 {{ message }}
             </div>
@@ -34,77 +75,56 @@
       {% endif %}
     {% endwith %}
 
-    <!--
-        SITE NAVIGATION & BOOTSTRAP NAV
-        https://jinja.palletsprojects.com/en/2.11.x/tricks/
-        https://getbootstrap.com/docs/5.0/components/navbar/
-    -->
+    <!-- Navigation -->
     {% set nav_links = [
         ('/about', 'about', 'About'),
         ('/hello', 'hello', 'How to Use'),
         ('/simple/dashboard', 'hello', 'Simple Job Search'),
         ('/complex/dashboard', 'hello', 'Complex Job Search'),
-
-
-    ] -%}
-    {% set active_page = active_page|default('home') -%}
+    ] %}
+    {% set active_page = active_page|default('home') %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <!--a class="navbar-brand" href="/">Job Search App</a-->
             <a class="navbar-brand" href="/">
-                <!--
-                    ICONS
-                    https://icons.getbootstrap.com/
-                -->
-                <i class="bi-globe" style="font-size: 1.7rem; color: white;"></i>
+                <i class="bi-globe" style="font-size: 1.7rem;"></i>
                 &nbsp;
                 Job Search App
             </a>
-
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                {% for href, page_id, link_text in nav_links %}
-                    {% if page_id == active_page %}
-                        {% set is_active = "active" -%}
-                    {% else %}
-                        {% set is_active = "" -%}
-                    {% endif %}
-
-                    <li class="nav-item">
-                        <a class="nav-link {{ is_active }}" href="{{href}}">{{link_text}}</a>
-                    </li>
-                {% endfor %}
+                <ul class="navbar-nav ms-auto">
+                    {% for href, page_id, link_text in nav_links %}
+                        {% set is_active = 'active' if page_id == active_page else '' %}
+                        <li class="nav-item">
+                            <a class="nav-link {{ is_active }}" href="{{ href }}">{{ link_text }}</a>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container" style="margin-top:2em;">
-
-        <!--
-            PAGE CONTENTS
-        -->
+    <!-- Page Content -->
+    <div class="container">
         <div id="content">
             {% block content %}
             {% endblock %}
         </div>
-
-        <footer style="margin-top:2em; margin-bottom:2em;">
-        <hr>
-            &copy; Copyright 2023 
-        </footer>
     </div>
+
+    <!-- Footer -->
+    <footer class="container">
+        <hr>
+        &copy; Copyright 2023
+    </footer>
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <script type="text/javascript">
-
-        console.log("Thanks for the page visit!")
-
+        console.log("Thanks for the page visit!");
     </script>
 </body>
 </html>
+
