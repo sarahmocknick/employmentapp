@@ -23,10 +23,8 @@ APP_KEY = os.getenv("APP_KEY")
 
 #app_id = getpass("Please input your app id: ")
 #app_key = getpass("Please input your app key: ")
-
-
-def simple_job_search(what="software developer"):
-    base_url = "http://api.adzuna.com/v1/api/jobs/gb/search"
+def simple_job_search(what="Software Developer"):
+    base_url = "http://api.adzuna.com/v1/api/jobs/gb/search/1"
 
     params = {
         'app_id': APP_ID,
@@ -37,13 +35,13 @@ def simple_job_search(what="software developer"):
     }
 
     r = requests.get(base_url, params=params)
-
-    if r.status_code == 200:
-        data = json.loads(r.text)
+    try:
+        r = requests.get(base_url, params=params)
+        r.raise_for_status()  # Raise an HTTPError for bad responses
+        data = r.json()
         return data
-    else:
-        print(f"Error: {r.status_code}")
-        print(r.text)
+    except requests.exceptions.RequestException as e:
+        print(f"Error: {e}")
         return None
 
 

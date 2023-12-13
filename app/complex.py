@@ -21,7 +21,7 @@ APP_KEY = os.getenv("APP_KEY")
 #app_id = getpass("Please input your app id: ")
 #app_key = getpass("Please input your app key: ")
 
-
+ 
 def complex_job_search(where=None, what_exclude=None, what="Software Developer", salary_min=0, full_time=1, permanent=1):
     base_url = "http://api.adzuna.com/v1/api/jobs/gb/search/1"
 
@@ -40,15 +40,14 @@ def complex_job_search(where=None, what_exclude=None, what="Software Developer",
 
     r = requests.get(base_url, params=params)
 
-    if r.status_code == 200:
-        data = json.loads(r.text)
+    try:
+        r = requests.get(base_url, params=params)
+        r.raise_for_status()  # Raise an HTTPError for bad responses
+        data = r.json()
         return data
-    else:
-        print(f"Error: {r.status_code}")
-        print(r.text)
+    except requests.exceptions.RequestException as e:
+        print(f"Error: {e}")
         return None
- 
-
 if __name__ == "__main__":
     what = input("What kind of job are you looking for?")
     salary_pref = input("Do you have a preference for a salary minumum? Please type yes or no: ").lower()
