@@ -35,7 +35,6 @@ def simple_job_search(what="Software Developer"):
         'content-type': 'application/json'
     }
 
-    r = requests.get(base_url, params=params)
     try:
         r = requests.get(base_url, params=params)
         r.raise_for_status()  # Raise an HTTPError for bad responses
