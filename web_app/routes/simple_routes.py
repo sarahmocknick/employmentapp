@@ -8,27 +8,36 @@ def simple_dashboard():
     if request.method == "POST":
         what = request.form.get("what")
         result = simple_job_search(what)
-        
-        if result is not None:
-            if isinstance(result, dict) and 'results' in result:
-                jobs = result['results']
-                if jobs:
-                    return render_template("simple_dashboard.html", jobs=jobs)
-                else:
-                    flash("No results found for the specified job query.", "warning")
-                    print(f"API returned empty results for query: {what}")  # Debugging
-            else:
-                flash("Error in retrieving job data. Please check your input and try again.", "danger")
-                print(f"Error retrieving data for query: {what}")  # Debugging
-                if isinstance(result, dict) and 'error' in result:
-                    print(f"API Error Message: {result['error']}") 
+
+        if result is None:
+            flash_redirect("Error in retrieving job data. Please check your input and try again.", "danger", what)
+
+        if isinstance(result, dict) and 'results' in result:
+            jobs = result['results']
+            if jobs:
+                return render_template("simple_dashboard.html", jobs=jobs)
+
+            flash_no_results(what)
         else:
-            flash("Error in retrieving job data. Please check your input and try again.", "danger")
-            print(f"Error retrieving data for query: {what}")  # Debugging
-        
+            flash_error(result, what)
+
         return redirect("/simple/dashboard")  # Redirect to the form
 
     return render_template("simple_form.html")  # Display the form initially
+
+def flash_redirect(message, category, what):
+    flash(message, category)
+    return redirect("/simple/dashboard")
+
+def flash_error(result, what):
+    flash("Error in retrieving job data. Please check your input and try again.", "danger")
+    print(f"Error retrieving data for query: {what}")  # Debugging
+    if isinstance(result, dict) and 'error' in result:
+        print(f"API Error Message: {result['error']}") 
+
+def flash_no_results(what):
+    flash("No results found for the specified job query.", "warning")
+    print(f"API returned empty results for query: {what}")  # Debugging
 
 @simple_routes.route("/api/simple.json")
 def simple_api():
@@ -36,8 +45,7 @@ def simple_api():
         data = simple_job_search()
         if data is not None:
             return jsonify(data)
-        else:
-            return {"message": "No data found."}, 404
+        return {"message": "No data found."}, 404
     except Exception as err:
         print('OOPS', err)
         return {"message": "Simple Job Search Data Error. Please try again."}, 404
