@@ -38,8 +38,8 @@ jobs:
       env:
         # set environment variable to use during testing
         # ... using the repository secret value set securely via repo settings
-        ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
-        SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
-        SENDER_ADDRESS: ${{ secrets.SENDER_ADDRESS }}
+        APP_KEY: ${{ secrets.APP_KEY }}
+        APP_ID: ${{ secrets.APP_ID }}
+        SECRET_PASSWORD: ${{ secrets.SECRET_PASSWORD }}
       run: |
         pytest
