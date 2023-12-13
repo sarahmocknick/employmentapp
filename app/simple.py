@@ -23,6 +23,7 @@ APP_KEY = os.getenv("APP_KEY")
 
 #app_id = getpass("Please input your app id: ")
 #app_key = getpass("Please input your app key: ")
+#test for error with request using HTTPError instead of 202 - used ChatGPT to fix this!
 def simple_job_search(what="Software Developer"):
     base_url = "http://api.adzuna.com/v1/api/jobs/gb/search/1"
 
