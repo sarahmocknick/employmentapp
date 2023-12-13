@@ -11,8 +11,8 @@ from getpass import getpass
 
 load_dotenv()
 
-user_app_id = os.getenv("APP_ID")
-user_app_key = os.getenv("APP_KEY")
+APP_ID = os.getenv("APP_ID")
+APP_KEY = os.getenv("APP_KEY")
 
 #breakpoint()
 
@@ -21,16 +21,16 @@ user_app_key = os.getenv("APP_KEY")
 
 #FUNCTIONS
 
-app_id = getpass("Please input your app id: ")
-app_key = getpass("Please input your app key: ")
-what = input("What kind of job are you looking for?")
+#app_id = getpass("Please input your app id: ")
+#app_key = getpass("Please input your app key: ")
 
-def simple_job_search():
-    base_url = "http://api.adzuna.com/v1/api/jobs/gb/search/1"
+
+def simple_job_search(what="software developer"):
+    base_url = "http://api.adzuna.com/v1/api/jobs/gb/search"
 
     params = {
-        'app_id': app_id,
-        'app_key': app_key,
+        'app_id': APP_ID,
+        'app_key': APP_KEY,
         'results_per_page': 20,
         'what': what,
         'content-type': 'application/json'
@@ -46,28 +46,28 @@ def simple_job_search():
         print(r.text)
         return None
 
-result = simple_job_search()
-if result and 'results' in result:
-    if result['results']:
-        print("Example Result:")
-        #print(result)
+
+if __name__ == "__main__":
+
+    what = input("What kind of job are you looking for?")
+    print(what)
+    result = simple_job_search(what)
+    #if result and 'results' in result:
+            #print(result)
+    if result and any(result["results"]):
+    #print(result)
         for job in result.get('results'):
-        #what if there is a case where there are no results/errors?
-        #we need to account for this in the code here
-            print("Job Title:", job.get('title'))
-            print("Company:", job.get('display_name'))
-            print("Location:", job.get('area'))
+            capitalized_title = job.get('title').title()
+
+            print("Job Title:", capitalized_title)
+            print("Company:", job["company"]["display_name"])
+            print("Location:", job["location"]["display_name"])
             print("Description:", job.get('description'))
             print("-" * 20)
     else:
-        print("No results found for the specified job query.")
+            print("No results found for the specified job query.")
 else:
-    print("Error in retrieving job data. Please check your input and try again.")
-
-
-
-
-
+        print("Error in retrieving job data. Please check your input and try again.")
 
 
 

@@ -1,9 +1,19 @@
+#This is the requirements.txt file
+
 requests
 
 python-dotenv
 
+sendgrid==6.5.0
 
 flask
 
+pandas
+
+#test
+
 pytest
+
+#PRODUCTION SERVER NEEDS THIS TO RUN THE WEB APP
+gunicorn
 
