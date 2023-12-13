@@ -54,7 +54,6 @@ def simple_api():
         print('OOPS', err)
         return {"message": "Simple Job Search Data Error. Please try again."}, 404
 
-
     # We need a route to render the job form function. 
     #form action poihnts to dashboard route 
     #action = "/simple/dashboard" to trigger the dashboard route
