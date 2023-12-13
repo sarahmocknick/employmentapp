@@ -3,6 +3,10 @@ from app.simple import simple_job_search
 
 simple_routes = Blueprint("simple_routes", __name__)
 
+def flash_no_results(what):
+    flash("No results found for the specified job query.", "warning")
+    print(f"API returned empty results for query: {what}")  # Debugging
+
 @simple_routes.route("/simple/dashboard", methods=["GET", "POST"])
 def simple_dashboard():
     if request.method == "POST":
@@ -49,7 +53,7 @@ def simple_api():
     except Exception as err:
         print('OOPS', err)
         return {"message": "Simple Job Search Data Error. Please try again."}, 404
-        
+
 
     # We need a route to render the job form function. 
     #form action poihnts to dashboard route 
