@@ -1,4 +1,6 @@
 from flask import Blueprint, request, render_template, flash, jsonify, redirect
+
+
 from app.complex import complex_job_search
 
 complex_routes = Blueprint("complex_routes", __name__)
@@ -48,3 +50,4 @@ def complex_api():
     except Exception as err:
         print('OOPS', err)
         return {"message": "Complex Job Search Data Error. Please try again."}, 404
+
