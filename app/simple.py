@@ -45,7 +45,6 @@ def simple_job_search(what="Software Developer"):
         print(f"Error: {e}")
         return None
 
-
 if __name__ == "__main__":
 
     what = input("What kind of job are you looking for?")
