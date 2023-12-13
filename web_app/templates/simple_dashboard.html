@@ -17,8 +17,8 @@
         <tbody>
             {% for job in jobs %}
             <tr>
-                <td>{{ job.get('title') }}</td>
-
+                <td>{{ job.get('title')|title }}</td>
+                
                 <td>{{ job["company"]["display_name"] }}</td>
                 <td>{{ job["location"]["display_name"] }}</td>
 
