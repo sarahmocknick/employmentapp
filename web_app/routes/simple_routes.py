@@ -11,8 +11,9 @@ def simple_dashboard():
 
         if result is None:
             flash_redirect("Error in retrieving job data. Please check your input and try again.", "danger", what)
+            return redirect("/simple/dashboard")
 
-        if isinstance(result, dict) and 'results' in result:
+        if is_successful_result(result):
             jobs = result['results']
             if jobs:
                 return render_template("simple_dashboard.html", jobs=jobs)
@@ -21,13 +22,15 @@ def simple_dashboard():
         else:
             flash_error(result, what)
 
-        return redirect("/simple/dashboard")  # Redirect to the form
+        return redirect("/simple/dashboard")
 
-    return render_template("simple_form.html")  # Display the form initially
+    return render_template("simple_form.html")
+
+def is_successful_result(result):
+    return isinstance(result, dict) and 'results' in result
 
 def flash_redirect(message, category, what):
     flash(message, category)
-    return redirect("/simple/dashboard")
 
 def flash_error(result, what):
     flash("Error in retrieving job data. Please check your input and try again.", "danger")

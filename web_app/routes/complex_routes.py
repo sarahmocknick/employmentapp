@@ -11,33 +11,42 @@ def complex_dashboard():
 
         if result is None:
             flash_redirect("Error in retrieving job data. Please check your input and try again.", "danger", what)
+            return redirect("/complex/dashboard")
 
-        if isinstance(result, dict) and 'results' in result:
+        if is_successful_result(result):
             jobs = result['results']
             if jobs:
-                for job in jobs:
-                    if job.get('contract_time') == 'full_time':
-                        job['contract_time'] = 'Full Time'
+                format_jobs(jobs)
                 return render_template("complex_dashboard.html", jobs=jobs)
-
-            flash("No results found for the specified job query.", "warning")
-            print(f"API returned empty results for query: {what}")  # Debugging
+            
+            flash_no_results(what)
         else:
             flash_error(result, what)
+        
+        return redirect("/complex/dashboard")
 
-        return redirect("/complex/dashboard")  # Redirect to the form
+    return render_template("complex_form.html")
 
-    return render_template("complex_form.html")  # Display the form initially
+def is_successful_result(result):
+    return isinstance(result, dict) and 'results' in result
+
+def format_jobs(jobs):
+    for job in jobs:
+        if job.get('contract_time') == 'full_time':
+            job['contract_time'] = 'Full Time'
 
 def flash_redirect(message, category, what):
     flash(message, category)
-    return redirect("/complex/dashboard")
 
 def flash_error(result, what):
     flash("Error in retrieving job data. Please check your input and try again.", "danger")
     print(f"Error retrieving data for query: {what}")  # Debugging
     if isinstance(result, dict) and 'error' in result:
         print(f"API Error Message: {result['error']}") 
+
+def flash_no_results(what):
+    flash("No results found for the specified job query.", "warning")
+    print(f"API returned empty results for query: {what}")  # Debugging
 
 @complex_routes.route("/api/complex.json")
 def complex_api():
