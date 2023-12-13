@@ -9,20 +9,16 @@ def complex_dashboard():
         what = request.form.get("what")
         result = complex_job_search(what)
 
-        if result is None:
+        if not result:
             flash_redirect("Error in retrieving job data. Please check your input and try again.", "danger", what)
             return redirect("/complex/dashboard")
 
         if is_successful_result(result):
-            jobs = result['results']
-            if jobs:
-                format_jobs(jobs)
-                return render_template("complex_dashboard.html", jobs=jobs)
-            
-            flash_no_results(what)
-        else:
-            flash_error(result, what)
-        
+            jobs = result.get('results', [])
+            format_jobs(jobs)
+            return render_template("complex_dashboard.html", jobs=jobs)
+
+        flash_error(result, what)
         return redirect("/complex/dashboard")
 
     return render_template("complex_form.html")
@@ -44,17 +40,11 @@ def flash_error(result, what):
     if isinstance(result, dict) and 'error' in result:
         print(f"API Error Message: {result['error']}") 
 
-def flash_no_results(what):
-    flash("No results found for the specified job query.", "warning")
-    print(f"API returned empty results for query: {what}")  # Debugging
-
 @complex_routes.route("/api/complex.json")
 def complex_api():
     try:
         data = complex_job_search()
-        if data is not None:
-            return jsonify(data)
-        return {"message": "No data found."}, 404
+        return jsonify(data) if data else {"message": "No data found."}, 404
     except Exception as err:
         print('OOPS', err)
         return {"message": "Complex Job Search Data Error. Please try again."}, 404

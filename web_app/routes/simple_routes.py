@@ -9,12 +9,12 @@ def simple_dashboard():
         what = request.form.get("what")
         result = simple_job_search(what)
 
-        if result is None:
+        if not result:
             flash_redirect("Error in retrieving job data. Please check your input and try again.", "danger", what)
             return redirect("/simple/dashboard")
 
         if is_successful_result(result):
-            jobs = result['results']
+            jobs = result.get('results', [])
             if jobs:
                 return render_template("simple_dashboard.html", jobs=jobs)
 
@@ -46,7 +46,7 @@ def flash_no_results(what):
 def simple_api():
     try:
         data = simple_job_search()
-        if data is not None:
+        if data:
             return jsonify(data)
         return {"message": "No data found."}, 404
     except Exception as err:
