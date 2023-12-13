@@ -15,13 +15,9 @@ def simple_dashboard():
 
         if is_successful_result(result):
             jobs = result.get('results', [])
-            if jobs:
-                return render_template("simple_dashboard.html", jobs=jobs)
+            return display_jobs(jobs, what)
 
-            flash_no_results(what)
-        else:
-            flash_error(result, what)
-
+        flash_error(result, what)
         return redirect("/simple/dashboard")
 
     return render_template("simple_form.html")
@@ -38,20 +34,22 @@ def flash_error(result, what):
     if isinstance(result, dict) and 'error' in result:
         print(f"API Error Message: {result['error']}") 
 
-def flash_no_results(what):
-    flash("No results found for the specified job query.", "warning")
-    print(f"API returned empty results for query: {what}")  # Debugging
+def display_jobs(jobs, what):
+    if jobs:
+        return render_template("simple_dashboard.html", jobs=jobs)
+    
+    flash_no_results(what)
+    return redirect("/simple/dashboard")
 
 @simple_routes.route("/api/simple.json")
 def simple_api():
     try:
         data = simple_job_search()
-        if data:
-            return jsonify(data)
-        return {"message": "No data found."}, 404
+        return jsonify(data) if data else {"message": "No data found."}, 404
     except Exception as err:
         print('OOPS', err)
         return {"message": "Simple Job Search Data Error. Please try again."}, 404
+        
 
     # We need a route to render the job form function. 
     #form action poihnts to dashboard route 
