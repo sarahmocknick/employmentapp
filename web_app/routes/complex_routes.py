@@ -1,5 +1,7 @@
-from flask import Blueprint, request, render_template, flash, jsonify, redirect
+#this is the complex_routes.py
 
+
+from flask import Blueprint, request, render_template, flash, jsonify, redirect
 
 from app.complex import complex_job_search
 
@@ -9,7 +11,16 @@ complex_routes = Blueprint("complex_routes", __name__)
 def complex_dashboard():
     if request.method == "POST":
         what = request.form.get("what")
-        result = complex_job_search(what)
+        salary_pref = request.form.get("salary_pref").lower()  # Ensure it's in lowercase for easier comparison
+        # Check the salary_pref string to determine the minimum salary
+        if salary_pref == "yes":
+            try:
+                salary_min = int(request.form.get("salary_min"))  # Convert salary_min to integer
+            except (ValueError, TypeError):
+                salary_min = 0
+        else:
+            salary_min = 0
+        result = complex_job_search(what, salary_min=salary_min)
 
         if not result:
             flash_redirect("Error in retrieving job data. Please check your input and try again.", "danger", what)
@@ -18,7 +29,11 @@ def complex_dashboard():
         if is_successful_result(result):
             jobs = result.get('results', [])
             format_jobs(jobs)
-            return render_template("complex_dashboard.html", jobs=jobs)
+
+            # Filter jobs based on salary_min
+            filtered_jobs = [job for job in jobs if (job.get('salary_min', 0) >= salary_min) or (job.get('salary_max', 0) >= salary_min)]
+
+            return render_template("complex_dashboard.html", jobs=filtered_jobs)
 
         flash_error(result, what)
         return redirect("/complex/dashboard")
@@ -38,9 +53,8 @@ def flash_redirect(message, category, what):
 
 def flash_error(result, what):
     flash("Error in retrieving job data. Please check your input and try again.", "danger")
-    print(f"Error retrieving data for query: {what}")  # Debugging
     if isinstance(result, dict) and 'error' in result:
-        print(f"API Error Message: {result['error']}") 
+        print(f"API Error Message: {result['error']}")
 
 @complex_routes.route("/api/complex.json")
 def complex_api():
@@ -50,4 +64,3 @@ def complex_api():
     except Exception as err:
         print('OOPS', err)
         return {"message": "Complex Job Search Data Error. Please try again."}, 404
-
